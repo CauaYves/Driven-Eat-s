@@ -72,6 +72,13 @@ img{
     flex-direction: column;
 
     box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.069);
+    
+    cursor: pointer;
+}
+
+.marcado{
+    border: 3px solid rgb(11, 223, 11);
+    box-shadow: 0px 5px 9px rgb(9, 235, 51);
 }
 
 #menu-pratos{
