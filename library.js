@@ -17,41 +17,50 @@ let pratoMarcado
 let bebidaMarcado
 let doceMarcado
 
+let total = []
 let pedidos = ['prato', 'bebida', 'doce']
 const btn = document.querySelector('.btn')
 
 prato0.addEventListener('click', () => {
    pratoMarcado = 1
    pedidos[0] = prato0.childNodes[3].innerHTML
+   total[0] = Number(prato0.childNodes[7].innerHTML.replace('R$',''))
    prato0.classList.add('marcado')
    prato1.classList.remove('marcado')
    prato2.classList.remove('marcado')
 
       if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
    }
 });
 prato1.addEventListener('click', () => {
    pratoMarcado = 2
    pedidos[0] = prato1.childNodes[3].innerHTML
+   total[0] = Number(prato1.childNodes[7].innerHTML.replace('R$',''))
    prato1.classList.add('marcado')
    prato2.classList.remove('marcado')
    prato0.classList.remove('marcado')
 
       if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 
 });
 prato2.addEventListener('click', () => {
    pratoMarcado = 3
    pedidos[0] = prato2.childNodes[3].innerHTML
+   total[0] = Number(prato2.childNodes[7].innerHTML.replace('R$',''))
    prato2.classList.add('marcado')
    prato0.classList.remove('marcado')
    prato1.classList.remove('marcado')
 
       if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 });
 
@@ -64,6 +73,9 @@ prato2.addEventListener('click', () => {
 bebida0.addEventListener('click', () => {
    bebidaMarcado = 1
    pedidos[1] = bebida0.childNodes[3].innerHTML
+
+   total[1] = Number(bebida0.childNodes[7].innerHTML.replace('R$',''))
+
    bebida0.classList.add('marcado')
    bebida1.classList.remove('marcado')
    bebida2.classList.remove('marcado')
@@ -72,27 +84,33 @@ bebida0.addEventListener('click', () => {
       btn.classList.add('habilitado')
    }
 });
-bebida1.addEventListener('click', () => {
+bebida1.addEventListener('click', () => { //CHÁ MATTE COM ERRO
    bebidaMarcado = 2
    pedidos[1] = bebida1.childNodes[3].innerHTML
+   total[1] = Number(bebida1.childNodes[7].innerHTML.replace('R$',''))
    bebida1.classList.add('marcado')
    bebida2.classList.remove('marcado')
    bebida0.classList.remove('marcado')
 
       if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 
 });
-bebida2.addEventListener('click', () => {
+bebida2.addEventListener('click', () => { 
    bebidaMarcado = 3
    pedidos[1] = bebida2.childNodes[3].innerHTML
+   total[1] = Number(bebida2.childNodes[7].innerHTML.replace('R$',''))
    bebida2.classList.add('marcado')
    bebida0.classList.remove('marcado')
    bebida1.classList.remove('marcado')
 
       if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 });
 
@@ -106,43 +124,60 @@ bebida2.addEventListener('click', () => {
 doce0.addEventListener('click', () => {
    doceMarcado = 1
    pedidos[2] = doce0.childNodes[3].innerHTML
+   total[2] = Number(doce0.childNodes[7].innerHTML.replace('R$',''))
    doce0.classList.add('marcado')
    doce1.classList.remove('marcado')
    doce2.classList.remove('marcado')
 
    if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 
 });
 doce1.addEventListener('click', () => {
    doceMarcado = 2
    pedidos[2] = doce1.childNodes[3].innerHTML
+   total[2] = Number(doce1.childNodes[7].innerHTML.replace('R$',''))
    doce1.classList.add('marcado')
    doce2.classList.remove('marcado')
    doce0.classList.remove('marcado')
 
    if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 
 });
 doce2.addEventListener('click', () => {
    doceMarcado = 3
    pedidos[2] = doce2.childNodes[3].innerHTML
+   total[2] = Number(doce2.childNodes[7].innerHTML.replace('R$',''))
    doce2.classList.add('marcado')
    doce0.classList.remove('marcado')
    doce1.classList.remove('marcado')
 
    if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
+      btn.removeAttribute('disabled')
+
    }
 
 });   
 
 function entregarPedido(){
 
+   
 
-   console.log(pedidos)
+const sumPrim = total.reduce(
+   (acc, val) => acc + val, 0
+)
+let valorFinal = sumPrim.toFixed(2)
+
+console.log(valorFinal)
+
+   window.open(`https://wa.me/5524999999999?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido:%0A-%20${pedidos[0]}%0A-%20Bebida:%20${pedidos[1]}%0A-%20Sobremesa:%20${pedidos[2]}%0ATotal:%20R$${valorFinal}`)
 
 }
