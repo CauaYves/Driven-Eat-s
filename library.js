@@ -1,183 +1,100 @@
-/*
-
-objetivos:
-
-- [X]  Ao clicar sobre um item, ele deve ser marcado como selecionado.
-- [X]  Ao clicar em um item, caso já exista um item selecionado na mesma categoria, este deve ser desmarcado e o novo item clicado deve ser o novo selecionado.
-- [X]  Ao clicar em um item já marcado, não é necessário desmarcá-lo. Botão de finalizar pedido
-- [X]  Por padrão, o botão de finalizar pedido deve vir desabilitado. Ao clicar no botão nesse estado, nada deve acontecer.
-- [X]  Quando o usuário tiver selecionado os itens das três categorias, o botão deve mudar para o estado de habilitado.
-*/
-   //frangos
-const prato0 = document.getElementsByClassName('prato')[0]; 
-const prato1 = document.getElementsByClassName('prato')[1];
-const prato2 = document.getElementsByClassName('prato')[2];
-   
-let pratoMarcado
-let bebidaMarcado
-let doceMarcado
-
-let total = []
-let pedidos = ['prato', 'bebida', 'doce']
 const btn = document.querySelector('.btn')
+const tela = document.querySelector('#confirmacao-pedido')
 
-prato0.addEventListener('click', () => {
-   pratoMarcado = 1
-   pedidos[0] = prato0.childNodes[3].innerHTML
-   total[0] = Number(prato0.childNodes[7].innerHTML.replace('R$',''))
-   prato0.classList.add('marcado')
-   prato1.classList.remove('marcado')
-   prato2.classList.remove('marcado')
+let itens = []
+let conta = []
+let soma
 
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
+let nome
+let local
+
+
+function desmarcarPrato(classe){
+   const pratoAnt = document.querySelector(`${classe} .marcado`)
+   if(pratoAnt !== null){
+      pratoAnt.classList.remove('marcado')
+   }
+}
+
+function concluirPedido(){
+   soma = conta.reduce(
+      (acc, val) => acc + val, 0
+   )
+   if(itens[0] != null  && itens[1] != null && itens[2] != null){
       btn.removeAttribute('disabled')
-   }
-});
-prato1.addEventListener('click', () => {
-   pratoMarcado = 2
-   pedidos[0] = prato1.childNodes[3].innerHTML
-   total[0] = Number(prato1.childNodes[7].innerHTML.replace('R$',''))
-   prato1.classList.add('marcado')
-   prato2.classList.remove('marcado')
-   prato0.classList.remove('marcado')
-
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
-
-   }
-
-});
-prato2.addEventListener('click', () => {
-   pratoMarcado = 3
-   pedidos[0] = prato2.childNodes[3].innerHTML
-   total[0] = Number(prato2.childNodes[7].innerHTML.replace('R$',''))
-   prato2.classList.add('marcado')
-   prato0.classList.remove('marcado')
-   prato1.classList.remove('marcado')
-
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
-
-   }
-});
-
-   //bebidas
-   const bebida0 = document.getElementsByClassName('prato')[3];
-   const bebida1 = document.getElementsByClassName('prato')[4];
-   const bebida2 = document.getElementsByClassName('prato')[5];
-   
-
-bebida0.addEventListener('click', () => {
-   bebidaMarcado = 1
-   pedidos[1] = bebida0.childNodes[3].innerHTML
-
-   total[1] = Number(bebida0.childNodes[7].innerHTML.replace('R$',''))
-
-   bebida0.classList.add('marcado')
-   bebida1.classList.remove('marcado')
-   bebida2.classList.remove('marcado')
-
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
       btn.classList.add('habilitado')
    }
-});
-bebida1.addEventListener('click', () => { //CHÁ MATTE COM ERRO
-   bebidaMarcado = 2
-   pedidos[1] = bebida1.childNodes[3].innerHTML
-   total[1] = Number(bebida1.childNodes[7].innerHTML.replace('R$',''))
-   bebida1.classList.add('marcado')
-   bebida2.classList.remove('marcado')
-   bebida0.classList.remove('marcado')
+}
 
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
+function selecPrato(prato) {
+   desmarcarPrato('.comidas')
+   valorPrato = Number(prato.childNodes[7].innerText.replace('R$', ''))
+   nomePrato = prato.childNodes[3].innerText
+   prato.classList.add('marcado')
 
-   }
+   itens[0] = nomePrato
+   conta[0] = valorPrato
 
-});
-bebida2.addEventListener('click', () => { 
-   bebidaMarcado = 3
-   pedidos[1] = bebida2.childNodes[3].innerHTML
-   total[1] = Number(bebida2.childNodes[7].innerHTML.replace('R$',''))
-   bebida2.classList.add('marcado')
-   bebida0.classList.remove('marcado')
-   bebida1.classList.remove('marcado')
+   concluirPedido()
+}
 
-      if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
+function mostrarTela(){
+   tela.style.display = 'block'
+}
 
-   }
-});
+function selecBebida(bebida){
+   desmarcarPrato('.bebidas')
+   valorBebida = Number(bebida.childNodes[7].innerText.replace('R$', ''))
+   nomeBebida = bebida.childNodes[3].innerText
+   bebida.classList.add('marcado')
 
-   
+   itens[1] = nomeBebida
+   conta[1] = valorBebida
 
-      //sobremesa
-   const doce0 = document.getElementsByClassName('prato')[6];
-   const doce1 = document.getElementsByClassName('prato')[7];
-   const doce2 = document.getElementsByClassName('prato')[8];
+   concluirPedido()
+}
 
-doce0.addEventListener('click', () => {
-   doceMarcado = 1
-   pedidos[2] = doce0.childNodes[3].innerHTML
-   total[2] = Number(doce0.childNodes[7].innerHTML.replace('R$',''))
-   doce0.classList.add('marcado')
-   doce1.classList.remove('marcado')
-   doce2.classList.remove('marcado')
+function selecDoce(doce){
+   desmarcarPrato('.doces')
+   valorDoce = Number(doce.childNodes[7].innerText.replace('R$', ''))
+   nomeDoce = doce.childNodes[3].innerText
+   doce.classList.add('marcado')
 
-   if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
+   itens[2] = nomeDoce
+   conta[2] = valorDoce
+   concluirPedido()
+}
+let ConfPrat = document.querySelectorAll('.textConfirm')[0].childNodes[1]
+let ConfValPrat = document.querySelectorAll('.textConfirm')[0].childNodes[3]
 
-   }
+let ConfBebi = document.querySelectorAll('.textConfirm')[1].childNodes[1]
+let ConfValBebi = document.querySelectorAll('.textConfirm')[1].childNodes[3]
 
-});
-doce1.addEventListener('click', () => {
-   doceMarcado = 2
-   pedidos[2] = doce1.childNodes[3].innerHTML
-   total[2] = Number(doce1.childNodes[7].innerHTML.replace('R$',''))
-   doce1.classList.add('marcado')
-   doce2.classList.remove('marcado')
-   doce0.classList.remove('marcado')
+let ConfDoce = document.querySelectorAll('.textConfirm')[2].childNodes[1]
+let ConfValDoce = document.querySelectorAll('.textConfirm')[2].childNodes[3]
 
-   if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
+let total = document.querySelectorAll('.textConfirm')[3].childNodes[3]
 
-   }
+function finalizar(){//botao de confirmação
 
-});
-doce2.addEventListener('click', () => {
-   doceMarcado = 3
-   pedidos[2] = doce2.childNodes[3].innerHTML
-   total[2] = Number(doce2.childNodes[7].innerHTML.replace('R$',''))
-   doce2.classList.add('marcado')
-   doce0.classList.remove('marcado')
-   doce1.classList.remove('marcado')
+   ConfPrat.innerText = itens[0]
+   ConfBebi.innerText = itens[1]
+   ConfDoce.innerText = itens[2]
 
-   if(pedidos[0] != 'prato' && pedidos[1] != 'bebida' && pedidos[2] != 'doce'){
-      btn.classList.add('habilitado')
-      btn.removeAttribute('disabled')
+   ConfValPrat.innerText = conta[0]
+   ConfValBebi.innerText = conta[1]
+   ConfValDoce.innerText = conta[2]
 
-   }
+   total.innerText = soma.toFixed(2)
 
-});   
+   nome = prompt('Qual seu nome?')
+   local = prompt(`Ola ${nome} digite seu Endereço abaixo`)
 
-function entregarPedido(){
-
-   
-
-const sumPrim = total.reduce(
-   (acc, val) => acc + val, 0
-)
-let valorFinal = sumPrim.toFixed(2)
-
-console.log(valorFinal)
-
-   window.open(`https://wa.me/5524999999999?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido:%0A-%20${pedidos[0]}%0A-%20Bebida:%20${pedidos[1]}%0A-%20Sobremesa:%20${pedidos[2]}%0ATotal:%20R$${valorFinal}`)
-
+   mostrarTela()
+}
+function esconderTela() {
+   tela.style.display = 'none'
+}
+function enviarWhats(){
+   window.open(`https://wa.me/5524999999999?text=Ol%C3%A1,%20gostaria%20de%20fazer%20o%20pedido:%0A-%20Prato:%20${itens[0]}%0A-%20Bebida:%20${itens[1]}%0A-%20Sobremesa:%20${itens[2]}%0ATotal:%20R$%20${soma}%0A%0ANome:%20${nome}%0AEndere%C3%A7o:%20${local}`)
 }

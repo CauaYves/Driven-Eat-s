@@ -16,81 +16,111 @@
         <hr>        
         <h2>Primeiro, seu prato</h2>
         <div id="menu-pratos"> <!--menu de pratos-->
-            <div class="pedidos"> <!--div com rolagem de opções de pratos-->
+            <div class="pedidos comidas"> <!--div com rolagem de opções de pratos-->
 
-                <div class="prato">
+                <div class="prato" onclick="selecPrato(this)" data-test="dish">
                     <img src="imagens/yinyang.png" alt="yin-yang">
-                    <h5>Frango Yin Yang</h5>
+                    <h5 data-test="item-name">Frango Yin Yang</h5>
                     <p>Um pouco de batata, um pouco de salada</p>
-                    <h5>R$ 19.90</h5>
+                    <h5 data-test="item-price">R$ 19.99</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecPrato(this)" data-test="dish">
                     <img src="imagens/peixe.webp" alt="yin-yang">
-                    <h5>Peixe assado</h5>
+                    <h5 data-test="item-name">Peixe assado</h5>
                     <p>Filé de Tilápia temperado</p>
-                    <h5>R$ 16.90</h5>
+                    <h5 data-test="item-price">R$ 16.99</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecPrato(this)" data-test="dish">
                     <img src="imagens/ensopado.jpg" alt="yin-yang">
-                    <h5>Ensopado</h5>
+                    <h5 data-test="item-name">Ensopado</h5>
                     <p>Sopa de legumes frescos</p>
-                    <h5>R$ 14.90</h5>
+                    <h5 data-test="item-price">R$ 14.99</h5>
                 </div>
                 
             </div>
 
             <h2>Agora, sua bebida</h2>
 
-            <div class="pedidos"> <!--div com rolagem de opções de pratos-->
+            <div class="pedidos bebidas"> <!--div com rolagem de opções de pratos-->
 
-                <div class="prato">
+                <div class="prato" onclick="selecBebida(this)" data-test="drink">
                     <img src="imagens/coquinha.png" alt="coca-cola">
-                    <h5>Coquinha gelada</h5>
+                    <h5 data-test="item-name">Coquinha gelada</h5>
                     <p>lata 350ml</p>
-                    <h5>R$ 7.90</h5>
+                    <h5 data-test="item-price">R$ 7.99</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecBebida(this)" data-test="drink">
                     <img src="imagens/cha.jpg" alt="chá">
-                    <h5>Chá Matte leão</h5>
+                    <h5 data-test="item-name">Chá Matte leão</h5>
                     <p>lata 200ml</p>
-                    <h5>R$ 5.49</h5>
+                    <h5 data-test="item-price">R$ 5.49</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecBebida(this)" data-test="drink">
                     <img src="imagens/fanta.webp" alt="fanta">
-                    <h5>Fanta laranja</h5>
+                    <h5 data-test="item-name">Fanta laranja</h5>
                     <p>lata 350ml</p>
-                    <h5>R$ 6.99</h5>
+                    <h5 data-test="item-price">R$ 6.99</h5>
                 </div>
                 
             </div>
 
             <h2>Por fim, sua sobremesa</h2>
 
-            <div class="pedidos"> <!--div com rolagem de opções de pratos-->
+            <div class="pedidos doces" > <!--div com rolagem de opções de pratos-->
 
-                <div class="prato">
+                <div class="prato" onclick="selecDoce(this)" data-test="dessert">
                     <img src="imagens/pudim.png" alt="pudim">
-                    <h5>Pudim</h5>
+                    <h5 data-test="item-name">Pudim</h5>
                     <p>pudim de leite condensado</p>
-                    <h5>R$ 4.99</h5>
+                    <h5 data-test="item-price">R$ 4.99</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecDoce(this)" data-test="dessert">
                     <img src="imagens/doce.jpg" alt="doce de leite">
-                    <h5>Doce de leite</h5>
+                    <h5 data-test="item-name">Doce de leite</h5>
                     <p>doce de leite com pedaços de côco</p>
-                    <h5>R$ 3.50</h5>
+                    <h5 data-test="item-price">R$ 3.59</h5>
                 </div>
-                <div class="prato">
+                <div class="prato" onclick="selecDoce(this)" data-test="dessert">
                     <img src="imagens/pave.jpg" alt="pave de chocolate">
-                    <h5>Pavê cremoso</h5>
+                    <h5 data-test="item-name">Pavê cremoso</h5>
                     <p>Feito com chocolate 50% cacau</p>
-                    <h5>R$ 7.99</h5>
+                    <h5 data-test="item-price">R$ 7.99</h5>
                 </div>
                 
             </div>
             
         </div>
-        <button class="btn" onclick="entregarPedido()" disabled>Selecione os 3 itens para fechar o pedido</button>
+
+        <div id="confirmacao-pedido">
+            <div id="dados" data-test="confirm-order-modal">
+                <div>
+                    <h3>Confirme seu pedido</h3>
+                </div>
+                <div class="nomes-valores">
+                    <div class="textConfirm">
+                        <p>[PRATO]</p>
+                        <p>[VALOR DO PRATO]</p>
+                    </div>
+                    <div class="textConfirm">
+                        <p>[BEBIDA]</p>
+                        <p>[VALOR DA BEBIDA]</p>
+                    </div>
+                    <div class="textConfirm">
+                        <p>[DOCE]</p>
+                        <p>[VALOR DO DOCE]</p>
+                    </div>
+                    <div class="textConfirm">
+                        <h3>Total</h3>
+                        <h3>[VALOR TOTAL]</h3>
+                    </div>
+                </div>
+                <div id="botoes">
+                    <button onclick="enviarWhats()" data-test="confirm-order-btn">Tudo certo, pode pedir!</button>
+                    <button onclick="esconderTela()" data-test="cancel-order-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <button class="btn" onclick="finalizar()" disabled data-test="order-btn">Selecione os 3 itens para fechar o pedido</button>
     </main>
     <script src="library.js"></script>
 </body>
