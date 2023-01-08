@@ -23,6 +23,7 @@ function concluirPedido(){
    if(itens[0] != null  && itens[1] != null && itens[2] != null){
       btn.removeAttribute('disabled')
       btn.classList.add('habilitado')
+      btn.innerText = 'Fechar pedido'
    }
 }
 
