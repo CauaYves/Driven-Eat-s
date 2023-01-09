@@ -11,6 +11,7 @@ main{
 
     background-color: #E5E5E5;
     font-family: Roboto;
+
 }
 #topo{
     padding: 21px;
@@ -24,6 +25,8 @@ main{
     justify-content: center;
 
     position: fixed;
+
+    z-index: 1;
 }
 h1, h4{
     color: aliceblue;
@@ -72,11 +75,27 @@ img{
     cursor: pointer;
 
     transition: all 0.3s;
+
+    position: relative;
 }
 .marcado{
-    border: 3px solid rgb(11, 223, 11);
-    box-shadow: 0px 5px 9px rgb(9, 235, 51);
-    
+    border: 3px solid rgb(11, 223, 11);    
+}
+.marcado::after{
+    content: "✓";
+    font-size: 22px;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    background-color: #32B72F;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 }
 #menu-pratos{
     margin-bottom: 120px;
