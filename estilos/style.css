@@ -10,7 +10,7 @@ main{
     position: relative;
 
     background-color: #E5E5E5;
-    font-family: Roboto;
+    font-family: 'Roboto';
 
 }
 #topo{
@@ -30,7 +30,7 @@ main{
 }
 h1, h4{
     color: aliceblue;
-    font-family: Righteous;
+    font-family: 'Righteous';
 }
 p{
     font-size: 15px;
@@ -60,6 +60,7 @@ img{
     overflow-x: scroll;
 }
 .prato{
+    background-color: #FFFF;
     width: 172px;
     height: 216px;
 
